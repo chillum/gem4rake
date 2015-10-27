@@ -26,3 +26,10 @@ rake install    # Install autoup-1.0.4.gem
 rake push       # Push autoup-1.0.4.gem
 rake uninstall  # Uninstall autoup gems
 ```
+
+### Notes
+
+We use `sudo` on `install`, `uninstall` and `cleanup` unless:
+
+* `SUDO=false` env. variable is set
+* on Windows
