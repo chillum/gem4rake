@@ -4,6 +4,8 @@ require 'rake/tasklib'
 #
 #  Gem's name must match current directory's basename.
 #
+#  A `.spec` file with that name is also required.
+#
 # = Usage:
 #
 #  Put this in your `Rakefile`:

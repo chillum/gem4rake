@@ -2,6 +2,8 @@
 
 Gem's name must match current directory's basename.
 
+A `.spec` file with that name is also required.
+
 ### Installation
 
 `gem install gem4rake`
