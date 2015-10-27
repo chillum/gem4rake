@@ -44,7 +44,7 @@ class Gem4Rake < ::Rake::TaskLib
 
     desc "Cleanup #{@name} gems"
     task :cleanup do
-      sudo "gem uninstall #{@name}"
+      sudo "gem cleanup #{@name}"
     end
 
     desc "Push #{@name}-#{version}.gem"
