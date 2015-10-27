@@ -30,7 +30,6 @@ require 'rake/tasklib'
 class Gem4Rake < ::Rake::TaskLib
   # Initialize Rake tasks to assist developing Ruby Gems.
   def initialize(version)
-
     @name = File.basename(Dir.getwd) # Get Gem's name from CWD basename.
 
     desc "Install #{@name}-#{version}.gem"
@@ -62,10 +61,9 @@ class Gem4Rake < ::Rake::TaskLib
     task :clean do
       rm Dir.glob("#{@name}-*.gem")
     end
-
   end
 
-  # Run the argument with sudo if on Unix and ENV['SUDO'] != 'false'.
+  # Run the argument with sudo if not on Windows and ENV['SUDO'] != 'false'.
   # Otherwise just run it.
   def sudo(arg)
     if ENV['SUDO'] != 'false' && ! Gem.win_platform?
