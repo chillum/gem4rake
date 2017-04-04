@@ -10,6 +10,6 @@ Gem::Specification.new do |s|
   s.author       = 'Vasily Korytov'
   s.email        = 'vasily.korytov@icloud.com'
   s.files        = %w(NOTICE lib/gem4rake.rb)
-  s.required_ruby_version   = '>= 1.9.2'
-  s.add_dependency 'rake',    '~> 10.0'
+  s.required_ruby_version = '>= 1.9.2'
+  s.add_dependency 'rake',  '>= 10', '< 13'
 end
