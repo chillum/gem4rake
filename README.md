@@ -31,7 +31,5 @@ rake uninstall  # Uninstall autoup gems
 
 ### Notes
 
-We use `sudo` on `install`, `uninstall` and `cleanup` unless:
-
-* `SUDO=false` env. variable is set
-* on Windows
+On Windows we don't use `--user-install` for install and uninstall.  
+On other platforms we do.

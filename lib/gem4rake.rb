@@ -3,7 +3,6 @@ require 'rake/tasklib'
 #  Rake tasks to assist developing Ruby Gems.
 #
 #  Gem's name must match current directory's basename.
-#
 #  A `.spec` file with that name is also required.
 #
 # = Usage:
@@ -16,7 +15,7 @@ require 'rake/tasklib'
 # = Example:
 #
 #  $ rake -T
-#  rake build      # Build autoup-1.0.4.gem  
+#  rake build      # Build autoup-1.0.4.gem
 #  rake clean      # Delete autoup-*.gem
 #  rake cleanup    # Cleanup autoup gems
 #  rake install    # Install autoup-1.0.4.gem
@@ -25,9 +24,8 @@ require 'rake/tasklib'
 #
 # = Notes:
 #
-#  We use `sudo` on `install`, `uninstall` and `cleanup` unless:
-#   * `SUDO=false` env. variable is set
-#   * on Windows
+#  On Windows we don't use `--user-install` for install and uninstall.
+#  On other platforms we do.
 #
 class Gem4Rake < ::Rake::TaskLib
   # Initialize Rake tasks to assist developing Ruby Gems.
@@ -36,17 +34,17 @@ class Gem4Rake < ::Rake::TaskLib
 
     desc "Install #{@name}-#{version}.gem"
     task :install => :build do
-      sudo "gem install #{@name}-#{version}.gem"
+      user_install "gem install #{@name}-#{version}.gem"
     end
 
     desc "Uninstall #{@name} gems"
     task :uninstall do
-      sudo "gem uninstall #{@name}"
+      user_install "gem uninstall #{@name}"
     end
 
     desc "Cleanup #{@name} gems"
     task :cleanup do
-      sudo "gem cleanup #{@name}"
+      sh "gem cleanup #{@name}"
     end
 
     desc "Push #{@name}-#{version}.gem"
@@ -65,13 +63,13 @@ class Gem4Rake < ::Rake::TaskLib
     end
   end
 
-  # Run the argument with sudo if not on Windows and ENV['SUDO'] != 'false'.
+  # Run the argument with `--user-install` if not on Windows.
   # Otherwise just run it.
-  def sudo(arg)
-    if ENV['SUDO'] != 'false' && ! Gem.win_platform?
-      sh 'sudo ' + arg
-    else
+  def user_install(arg)
+    if Gem.win_platform?
       sh arg
+    else
+      sh arg + ' --user-install'
     end
   end
 
