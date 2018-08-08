@@ -24,8 +24,7 @@ require 'rake/tasklib'
 #
 # = Notes:
 #
-#  On Windows we don't use `--user-install` for install and uninstall.
-#  On other platforms we do.
+#  If you got permission denied errors, you may need: `echo gem: --user-install >~/.gemrc`
 #
 class Gem4Rake < ::Rake::TaskLib
   # Initialize Rake tasks to assist developing Ruby Gems.
@@ -34,12 +33,12 @@ class Gem4Rake < ::Rake::TaskLib
 
     desc "Install #{@name}-#{version}.gem"
     task :install => :build do
-      user_install "gem install #{@name}-#{version}.gem"
+      sh "gem install #{@name}-#{version}.gem"
     end
 
     desc "Uninstall #{@name} gems"
     task :uninstall do
-      user_install "gem uninstall #{@name}"
+      sh "gem uninstall #{@name}"
     end
 
     desc "Cleanup #{@name} gems"
@@ -60,16 +59,6 @@ class Gem4Rake < ::Rake::TaskLib
     desc "Delete #{@name}-*.gem"
     task :clean do
       rm Dir.glob("#{@name}-*.gem")
-    end
-  end
-
-  # Run the argument with `--user-install` if not on Windows.
-  # Otherwise just run it.
-  def user_install(arg)
-    if Gem.win_platform?
-      sh arg
-    else
-      sh arg + ' --user-install'
     end
   end
 
