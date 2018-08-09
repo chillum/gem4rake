@@ -1,7 +1,6 @@
 ## Rake tasks to assist developing Ruby Gems [![Gem Version](https://badge.fury.io/rb/gem4rake.svg)](http://badge.fury.io/rb/gem4rake)
 
-Gem's name must match current directory's basename.
-
+Gem's name must match current directory's basename.  
 A `.spec` file with that name is also required.
 
 ### Installation
@@ -31,5 +30,4 @@ rake uninstall  # Uninstall autoup gems
 
 ### Notes
 
-On Windows we don't use `--user-install` for install and uninstall.  
-On other platforms we do.
+If you got permission denied errors, you may need: `echo gem: --user-install > ~/.gemrc`

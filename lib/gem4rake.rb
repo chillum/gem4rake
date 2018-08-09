@@ -24,7 +24,7 @@ require 'rake/tasklib'
 #
 # = Notes:
 #
-#  If you got permission denied errors, you may need: `echo gem: --user-install >~/.gemrc`
+#  If you got permission denied errors, you may need: `echo gem: --user-install > ~/.gemrc`
 #
 class Gem4Rake < ::Rake::TaskLib
   # Initialize Rake tasks to assist developing Ruby Gems.
