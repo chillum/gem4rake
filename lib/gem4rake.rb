@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake/tasklib'
 
 #  Rake tasks to assist developing Ruby Gems.
@@ -32,7 +34,7 @@ class Gem4Rake < ::Rake::TaskLib
     @name = File.basename(Dir.getwd) # Get Gem's name from CWD basename.
 
     desc "Install #{@name}-#{version}.gem"
-    task :install => :build do
+    task install: :build do
       sh "gem install #{@name}-#{version}.gem"
     end
 
@@ -47,7 +49,7 @@ class Gem4Rake < ::Rake::TaskLib
     end
 
     desc "Push #{@name}-#{version}.gem"
-    task :push => :build do
+    task push: :build do
       sh "gem push #{@name}-#{version}.gem"
     end
 
@@ -61,5 +63,4 @@ class Gem4Rake < ::Rake::TaskLib
       rm Dir.glob("#{@name}-*.gem")
     end
   end
-
 end
