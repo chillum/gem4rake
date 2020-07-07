@@ -32,30 +32,46 @@ class Gem4Rake < ::Rake::TaskLib
   # Initialize Rake tasks to assist developing Ruby Gems.
   def initialize(version)
     @name = File.basename(Dir.getwd) # Get Gem's name from CWD basename.
+    @version = version
 
-    desc "Install #{@name}-#{version}.gem"
+    build_task
+    install_tasks
+    push_task
+    clean_tasks
+  end
+
+  private
+
+  def build_task
+    desc "Build #{@name}-#{@version}.gem"
+    task :build do
+      sh "gem build #{@name}.gemspec"
+    end
+  end
+
+  def install_tasks
+    desc "Install #{@name}-#{@version}.gem"
     task install: :build do
-      sh "gem install #{@name}-#{version}.gem"
+      sh "gem install #{@name}-#{@version}.gem"
     end
 
     desc "Uninstall #{@name} gems"
     task :uninstall do
       sh "gem uninstall #{@name}"
     end
+  end
 
+  def push_task
+    desc "Push #{@name}-#{@version}.gem"
+    task push: :build do
+      sh "gem push #{@name}-#{@version}.gem"
+    end
+  end
+
+  def clean_tasks
     desc "Cleanup #{@name} gems"
     task :cleanup do
       sh "gem cleanup #{@name}"
-    end
-
-    desc "Push #{@name}-#{version}.gem"
-    task push: :build do
-      sh "gem push #{@name}-#{version}.gem"
-    end
-
-    desc "Build #{@name}-#{version}.gem"
-    task :build do
-      sh "gem build #{@name}.gemspec"
     end
 
     desc "Delete #{@name}-*.gem"

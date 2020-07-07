@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class Gem4Rake
-  VERSION = '1.3'
+  VERSION = '1.3.1'
 end
