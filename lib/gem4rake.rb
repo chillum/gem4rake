@@ -31,6 +31,7 @@ require 'rake/tasklib'
 class Gem4Rake < ::Rake::TaskLib
   # Initialize Rake tasks to assist developing Ruby Gems.
   def initialize(version)
+    super()
     @name = File.basename(Dir.getwd) # Get Gem's name from CWD basename.
     @version = version
 
