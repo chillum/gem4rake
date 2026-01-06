@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.license      = 'Apache-2.0'
   s.author       = 'Vasily Korytov'
   s.email        = 'v.korytov@outlook.com'
+  s.metadata     = { 'rubygems_mfa_required' => 'true' }
   s.files        = %w[NOTICE lib/gem4rake.rb]
   s.required_ruby_version = '>= 2.4'
   s.add_dependency 'rake',  '>= 10', '< 14'
